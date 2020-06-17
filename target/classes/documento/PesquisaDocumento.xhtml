@@ -1,0 +1,66 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Upload</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Upload</h1>
+
+		<h:form id="frmPesquisa">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" id="botaoNovo"
+						action="#{pesquisaDocumentoBean.listarDocumentosFuncionario}"
+						update="frmPesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painelDadosPessoais"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Código do Funcionário" for="codigo" />
+				<p:inputText id="codigo" size="10" maxlength="10"
+					value="#{pesquisaDocumentoBean.documento.codigo}" />
+			</p:panelGrid>
+
+			<p:dataTable id="acessoriosTable"
+				value="#{pesquisaDocumentoBean.listaDocumentosDiretorio}"
+				var="documento" style="margin-top: 20px"
+				emptyMessage="Nenhum acessorio encontrado." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Código Funcionario"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{documento.funcionario.codigo}" />
+				</p:column>
+
+				<p:column headerText="Nome Funcionario"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{documento.funcionario.nome}" />
+				</p:column>
+
+				<p:column headerText="Nome Arquivo"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{documento.nomeArquivo}" />
+				</p:column>
+
+				<p:column style="width: 100px; text-align: center">
+
+					<p:commandButton value="Download" ajax="false"
+						icon="ui-icon-arrowthick-1-s"
+						actionListener="#{pesquisaDocumentoBean.downloadDocumento(documento.nomeArquivo, documento.funcionario.codigo)}">
+
+						<p:fileDownload value="#{pesquisaDocumentoBean.file}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

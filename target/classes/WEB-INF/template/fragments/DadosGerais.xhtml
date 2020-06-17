@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<p:panelGrid columns="2" id="painelDadosPessoais"
+		style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+		<p:outputLabel value="Código" for="codigo" />
+		<p:inputText id="codigo" size="10" maxlength="10"
+			value="#{cadastroFuncionarioBean.funcionario.codigo}" readonly="true" />
+
+		<p:outputLabel value="Nome" for="nome" />
+		<p:inputText id="nome" size="60" maxlength="80"
+			value="#{cadastroFuncionarioBean.funcionario.nome}" required="true"
+			requiredMessage="Nome do Funcionario é Obrigatório" />
+
+
+		<p:outputLabel value="Estado civil" for="estadoCivil" />
+		<p:selectOneMenu id="estadoCivil"
+			value="#{cadastroFuncionarioBean.funcionario.estadoCivil}">
+			<f:selectItem itemLabel="Selecione o Estado Civil" />
+			<f:selectItems value="#{cadastroFuncionarioBean.civils}" var="civil"
+				itemLabel="#{civil}" itemValue="#{civil}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Data de nascimento" for="dataNascimento" />
+		<p:calendar id="dataNascimento" size="20"
+			value="#{cadastroFuncionarioBean.funcionario.dataNascimento}"
+			pattern="dd/MM/yyyy" navigator="true" locale="pt_BR" />
+
+
+
+		<p:outputLabel value="Transporte" for="transporte" />
+		<p:selectOneMenu id="transporte"
+			value="#{cadastroFuncionarioBean.funcionario.transporte}">
+			<f:selectItem itemLabel="Selecione o Transporte" />
+			<f:selectItems value="#{cadastroFuncionarioBean.transportes}"
+				var="transporte" itemLabel="#{transporte}" itemValue="#{transporte}" />
+		</p:selectOneMenu>
+
+
+		<p:outputLabel value="E-mail" for="email" />
+		<p:inputText id="email" size="40" maxlength="40"
+			value="#{cadastroFuncionarioBean.funcionario.email}" />
+
+		<p:outputLabel value="Pis" for="pis" />
+		<p:inputText id="pis" size="40" maxlength="40"
+			value="#{cadastroFuncionarioBean.funcionario.pis}" required="true"
+			requiredMessage="Pis do Funcionario é Obrigatório" />
+
+		<p:outputLabel value="Cargo" for="cargo" />
+		<p:selectOneMenu id="cargo"
+			value="#{cadastroFuncionarioBean.funcionario.cargo}">
+			<f:selectItem itemLabel="Selecione o Cargo" />
+			<f:selectItems value="#{cadastroFuncionarioBean.cargos}" var="cargo"
+				itemLabel="#{cargo.nome}" itemValue="#{cargo}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Empresa" for="empresa" />
+		<p:selectOneMenu id="empresa"
+			value="#{cadastroFuncionarioBean.funcionario.empresa}">
+			<f:selectItem itemLabel="Selecione a Empresa" />
+			<f:selectItems value="#{cadastroFuncionarioBean.empresas}"
+				var="empresa" itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+		</p:selectOneMenu>
+
+
+		<p:outputLabel value="Telefone Fixo" for="telefoneFixo" />
+		<p:inputText id="telefoneFixo" size="15" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.telefone.fixo}" />
+
+		<p:outputLabel value="Telefone Celular" for="telefoneCelular" />
+		<p:inputText id="telefoneCelular" size="15" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.telefone.celular}">
+
+		</p:inputText>
+
+	</p:panelGrid>
+
+
+
+</ui:composition>

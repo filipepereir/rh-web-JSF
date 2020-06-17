@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">RH - WEB</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+
+	<h:outputScript library="js" name="jquery.maskMoney.min.js" />
+	<h:outputScript library="js" name="pt.js" />
+	<h:outputScript library="js" name="via-cep.js"></h:outputScript>
+
+</h:head>
+
+<h:body>
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="imagens" name="carregando.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<header>
+	<div style="float: left">
+		<h:link outcome="/Home">
+			<h:graphicImage library="imagens" name="logo-algaworks.png" />
+		</h:link>
+	</div>
+
+	<div style="float: right; margin-right: 110px">
+		<h:form style="display: inline-block" accept-charset="UTF-8">
+			<p:menubar styleClass="menu-sistema">
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Funcionario"
+						outcome="/funcionario/CadastroFuncionario" />
+					<p:menuitem value="Documentos"
+						outcome="/documento/CadastroDocumento" />
+					<p:menuitem value="Acessório" />
+					<p:menuitem value="Carro" />
+					<p:separator />
+					<p:menuitem value="Empresa" outcome="/empresa/CadastroEmpresa" />
+					<p:menuitem value="Cargo" outcome="/cargo/CadastroCargo" />
+				</p:submenu>
+				<p:menuitem value="Novo Aluguel" />
+				<p:submenu label="Relatórios">
+					<p:menuitem value="Funcionarios Ativos"
+						outcome="/relatorios/RelatorioFuncionariosAtivos" />
+
+					<p:menuitem value="Salario Funcionarios"
+						outcome="/relatorios/RelatorioSalarioFuncionarios" />
+
+
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+	</div>
+	<div style="clear: both"></div>
+	</header>
+
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+
+	<p:separator style="margin-top: 20px" />
+
+	<footer> Curso Online de Persistência de Dados com JPA 2 e
+	Hibernate - <a href="http://bit.ly/VJTAnC" target="_blank">www.algaworks.com</a>
+	</footer>
+
+	<script>
+		function configurarMoeda() {
+			$(".moeda").maskMoney({
+				decimal : ",",
+				thousands : ".",
+				allowZero : true
+			});
+		}
+
+		$(document).ready(function() {
+			configurarMoeda();
+		})
+	</script>
+
+	<script>
+		PrimeFaces.locales['pt_BR'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			weekNumberTitle : 'Sm',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			currentText : 'Começo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia',
+
+		};
+	</script>
+</h:body>
+
+</html>

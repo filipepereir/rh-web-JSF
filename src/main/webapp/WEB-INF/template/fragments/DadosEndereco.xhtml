@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<p:panelGrid columns="2" id="painelEndereco"
+		style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+		<p:outputLabel value="CEP" for="cep" id="campoCep" />
+		<p:inputText id="cep" size="20" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.endereco.cep}"
+			onblur="cep();" />
+
+		<p:outputLabel value="Rua" for="rua" />
+		<p:inputText id="rua" size="20" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.endereco.rua}" />
+
+		<p:outputLabel value="Número" for="numero" />
+		<p:inputText id="numero" size="20" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.endereco.numero}" />
+
+		<p:outputLabel value="Complemento" for="complemento" />
+		<p:inputText id="complemento" size="20" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.endereco.complemento}" />
+
+		<p:outputLabel value="Bairro" for="bairro" />
+		<p:inputText id="bairro" size="30" maxlength="40"
+			value="#{cadastroFuncionarioBean.funcionario.endereco.bairro}" />
+
+		<p:outputLabel value="Cidade" for="cidade" />
+		<p:inputText id="cidade" size="20" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.endereco.cidade}" />
+
+		<p:outputLabel value="Uf" for="uf" />
+		<p:inputText id="uf" size="20" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.endereco.uf}" />
+
+
+	</p:panelGrid>
+
+
+</ui:composition>

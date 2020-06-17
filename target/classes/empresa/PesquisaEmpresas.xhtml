@@ -1,0 +1,69 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de Funcionário</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Pesquisa de Funcionário</h1>
+
+		<h:form id="frmPesquisa">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Novo" id="botaoNovo"
+						action="/empresa/CadastroEmpresa.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:dataTable id="empresasTable"
+				value="#{pesquisaEmpresaBean.empresas}" var="empresa"
+				style="margin-top: 20px" emptyMessage="Nenhuma empresa encontrada."
+				rows="20" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+				<p:column headerText="Código"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{empresa.codigo}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{empresa.nome}" />
+				</p:column>
+				<p:column headerText="Cnpj">
+					<h:outputText value="#{empresa.cnpj}" />
+				</p:column>
+				<p:column headerText="Numero">
+					<h:outputText value="#{empresa.numeroEmpresa}" />
+				</p:column>
+
+				<p:column style="width: 100px; text-align: center">
+					<p:button outcome="/empresa/CadastroEmpresa" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="empresa" value="#{empresa.codigo}" />
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaEmpresaBean.empresaSelecionada}"
+							value="#{empresa}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog id="confirmacaoExclusaoDialog"
+				widgetVar="confirmacaoExclusao"
+				message="Tem certeza que deseja excluir o funcionario #{pesquisaEmpresaBean.empresaSelecionada.nome}?"
+				header="Exclusão de funcionario" severity="alert">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim" update=":frmPesquisa:empresasTable"
+					onclick="confirmacaoExclusao.hide()"
+					action="#{pesquisaEmpresaBean.excluir}" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

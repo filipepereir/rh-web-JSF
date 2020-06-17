@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<p:panelGrid columns="2" id="painelContratacao"
+		style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+		<p:outputLabel value="Data de Admissão" for="dataAdmissao" />
+		<p:calendar id="dataAdmissao" size="20" pattern="dd/MM/yyyy"
+			value="#{cadastroFuncionarioBean.funcionario.contratacao.dataAdmissao}"
+			navigator="true" locale="pt_BR" />
+
+		<p:outputLabel value="Data de Demissão" for="dataDemissao" />
+		<p:calendar id="dataDemissao" size="20" pattern="dd/MM/yyyy"
+			value="#{cadastroFuncionarioBean.funcionario.contratacao.dataDemissao}"
+			navigator="true" locale="pt_BR" />
+
+		<p:outputLabel value="Situação" for="situacao" />
+		<p:selectOneMenu id="situacao"
+			value="#{cadastroFuncionarioBean.funcionario.contratacao.status}">
+			<f:selectItem itemLabel="Selecione o Status" />
+			<f:selectItems value="#{cadastroFuncionarioBean.status}"
+				var="transporte" itemLabel="#{situacao}" itemValue="#{situacao}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Salario" for="salario" />
+		<p:inputText id="salario" size="15" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.salario.valor}"
+			styleClass="moeda">
+			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+		</p:inputText>
+
+		<p:outputLabel value="Observação" for="observacao" />
+		<p:inputTextarea id="observacao" size="20" maxlength="20"
+			value="#{cadastroFuncionarioBean.funcionario.contratacao.observacao}" />
+
+
+	</p:panelGrid>
+
+
+</ui:composition>

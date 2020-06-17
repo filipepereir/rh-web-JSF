@@ -1,0 +1,57 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de Funcionarios por Status</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Funcionarios por Status</h1>
+
+		<h:form id="frmPesquisa">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" id="botaoSalvar"
+						action="#{pesquisaContratacaoAtivosBean.listarFuncionario}"
+						update="frmPesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painelDadosPessoais"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Situação" for="situacao" />
+				<p:selectOneMenu id="situacao"
+					value="#{pesquisaContratacaoAtivosBean.contratacao.status}">
+					<f:selectItem itemLabel="Selecione o Status" />
+					<f:selectItems value="#{pesquisaContratacaoAtivosBean.status}"
+						var="transporte" itemLabel="#{situacao}" itemValue="#{situacao}" />
+				</p:selectOneMenu>
+
+			</p:panelGrid>
+
+			<p:dataTable id="cargosTable"
+				value="#{pesquisaContratacaoAtivosBean.funcionarios}"
+				var="funcionario" style="margin-top: 20px"
+				emptyMessage="Nenhum funcionario Ativo" rows="20" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				<p:column headerText="Código"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{funcionario.codigo}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{funcionario.nome}" />
+				</p:column>
+
+				<p:column headerText="Status">
+					<h:outputText value="#{funcionario.contratacao.status}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

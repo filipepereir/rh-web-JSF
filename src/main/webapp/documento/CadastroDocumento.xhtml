@@ -1,0 +1,43 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Upload</ui:define>
+
+	<ui:define name="corpo">
+
+
+		<h1>Upload</h1>
+
+		<h:form enctype="multipart/form-data" id="uploadForm">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+
+				<p:toolbarGroup align="right">
+					<p:toolbarGroup align="right">
+						<p:button value="Pesquisa" outcome="/documento/PesquisaDocumento" />
+					</p:toolbarGroup>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Código Funcionario" for="codigoFuncionario" />
+				<p:inputText id="codigoFuncionario" size="10" maxlength="10"
+					value="#{cadastroDocumentoBean.codigoFuncionario}" required="true"
+					requiredMessage="Codigo é Obrigatório" />
+
+				<p:outputLabel value="Enviar Arquivo" />
+				<p:fileUpload
+					fileUploadListener="#{cadastroDocumentoBean.enviarArquivo}"
+					showButtons="true" label="Procurar..." auto="true" />
+			</p:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
