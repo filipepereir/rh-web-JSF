@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.persistence.TypedQuery;
 import org.junit.Test;
 
 import com.rh.modelo.Funcionario;
+import com.rh.modelo.Salario;
 import com.rh.modelo.Status;
 
 public class TesteTyped {
@@ -52,6 +54,38 @@ public class TesteTyped {
 		lista = Arrays.asList(Status.values());
 
 		lista.forEach(item -> System.out.println(item));
+	}
+
+	@Test
+	public void buscarDiferente() {
+
+		String jpql = "select f.nome, f.salario.valor from Funcionario f";
+
+		List<Object[]> resultados = manager.createQuery(jpql).getResultList();
+
+		List<Funcionario> lista = new ArrayList<Funcionario>();
+
+		for (Object[] objects : resultados) {
+			Funcionario funcionario = new Funcionario();
+			Salario salario = new Salario();
+
+			funcionario.setNome((String) objects[0]);
+
+			salario.setValor((BigDecimal) objects[1]);
+
+			funcionario.setSalario(salario);
+
+			lista.add(funcionario);
+
+		}
+
+		for (Funcionario funcionario : lista) {
+
+			System.out.println(funcionario.getNome());
+			System.out.println(funcionario.getSalario().getValor());
+
+		}
+
 	}
 
 }
