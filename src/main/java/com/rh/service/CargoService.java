@@ -1,6 +1,7 @@
 package com.rh.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,6 +18,10 @@ public class CargoService implements Serializable {
 	public void salvar(Cargo cargo) {
 		cargoDAO.salvar(cargo);
 
+	}
+
+	public List<Cargo> listarTodosCargos() {
+		return cargoDAO.listarTodos(Cargo.class);
 	}
 
 }

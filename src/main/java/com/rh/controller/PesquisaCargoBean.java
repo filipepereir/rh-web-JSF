@@ -9,8 +9,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.rh.dao.GenericDAO;
 import com.rh.modelo.Cargo;
+import com.rh.service.CargoService;
 
 @Named(value = "pesquisaCargoBean")
 @ViewScoped
@@ -22,7 +22,7 @@ public class PesquisaCargoBean implements Serializable {
 	private Cargo cargoSelecionado;
 
 	@Inject
-	private GenericDAO<Cargo> cargoDAO;
+	private CargoService cargoService;
 
 	public PesquisaCargoBean() {
 		cargos = new ArrayList<Cargo>();
@@ -31,7 +31,7 @@ public class PesquisaCargoBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		cargos = cargoDAO.listarTodos(Cargo.class);
+		cargos = cargoService.listarTodosCargos();
 	}
 
 	public List<Cargo> getCargos() {
